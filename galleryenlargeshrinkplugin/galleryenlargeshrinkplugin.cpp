@@ -28,6 +28,8 @@
 #include <MLibrary>
 #include <MApplication>
 #include <MBanner>
+#include <MMessageBox>
+#include <MLabel>
 #include <QGraphicsSceneMouseEvent>
 #include <QuillImageFilter>
 
@@ -36,12 +38,15 @@ static const float   EFFECT_FORCE          = 1.0;
 static const int     TAP_DISTANCE          = 20;
 static const int     PORTRAIT_HEIGHT       = 120;
 static const int     LANDSCAPE_HEIGHT      = 72;
-static const int     BANNER_TIMEOUT        = 2 * 1000;
+static const int     INFOBANNER_TIMEOUT    = 2 * 1000;
+static const int     IMAGE_MAX_HEIGHT      = 512;
+static const int     IMAGE_MAX_WIDTH       = 512;
 
 M_LIBRARY
 
 GalleryEnlargeShrinkPluginPrivate::GalleryEnlargeShrinkPluginPrivate() :
-    m_focusPosition()
+    m_focusPosition(),
+    m_validImage(true)
 {
 }
 
@@ -108,21 +113,39 @@ bool GalleryEnlargeShrinkPlugin::receiveMouseEvent(QGraphicsSceneMouseEvent *eve
         event->button() == Qt::LeftButton &&
         (event->scenePos() - event->buttonDownScenePos(Qt::LeftButton)).manhattanLength() < TAP_DISTANCE) {
         Q_D(GalleryEnlargeShrinkPlugin);
-        d->m_focusPosition = event->pos().toPoint();
-        performEditOperation();
-        return true;
+        if (d->m_validImage) {
+            d->m_focusPosition = event->pos().toPoint();
+            performEditOperation();
+            return true;
+        } else {
+            showInfoBanner("Plugin disabled for this image size");
+        }
     }
     return false;
 }
 
 void GalleryEnlargeShrinkPlugin::activate()
 {
-    MBanner *banner = new MBanner();
-    banner->setStyleName("InformationBanner");
-    banner->setTitle("Tap on the image to apply the effect");
-    banner->model()->setDisappearTimeout(BANNER_TIMEOUT);
-    banner->appear(MApplication::activeWindow(), MSceneWindow::DestroyWhenDone);
-    connect(this, SIGNAL(deactivated()), banner, SLOT(disappear()));
+    if (editUiProvider()) {
+        Q_D(GalleryEnlargeShrinkPlugin);
+        d->m_validImage = editUiProvider()->fullImageSize().height() <= IMAGE_MAX_HEIGHT &&
+                          editUiProvider()->fullImageSize().width()  <= IMAGE_MAX_WIDTH;
+        if (d->m_validImage) {
+            showInfoBanner("Tap on an area to keep it focused");
+        } else {
+            showMessageBox("Enlarge Shrink plugin limitations",
+                           "Gallery Enlarge Shrink plugin is currently limited to "
+                           "small images (512x512)<br />"
+                           "For a given image:"
+                           "<ol>"
+                           "<li>Scale it or crop it</li>"
+                           "<li>Save it with a different name</li>"
+                           "<li>Apply the filter to the new one</li>"
+                           "</ol>");
+            GalleryEnlargeShrinkWidget* widget = static_cast<GalleryEnlargeShrinkWidget*>(toolBarWidget());
+            widget->setEnabled(d->m_validImage);
+        }
+    }
 }
 
 void GalleryEnlargeShrinkPlugin::performEditOperation()
@@ -144,6 +167,36 @@ void GalleryEnlargeShrinkPlugin::performEditOperation()
             emit editOperationPerformed();
         }
     }
+}
+
+MMessageBox* GalleryEnlargeShrinkPlugin::showMessageBox(const QString& title, const QString& text) const
+{
+    MMessageBox* messageBox = new MMessageBox(title, "");
+    MLabel* innerLabel = new MLabel(messageBox);
+    innerLabel->setWordWrap(true);
+    innerLabel->setWrapMode(QTextOption::WrapAtWordBoundaryOrAnywhere);
+    innerLabel->setStyleName("CommonQueryText");
+    innerLabel->setText(text);
+    innerLabel->setAlignment(Qt::AlignHCenter);
+    messageBox->setCentralWidget(innerLabel);
+    connect(this, SIGNAL(deactivated()),
+            messageBox, SLOT(disappear()));
+    messageBox->appear(MSceneWindow::DestroyWhenDone);
+
+    return messageBox;
+}
+
+MBanner* GalleryEnlargeShrinkPlugin::showInfoBanner(const QString& title) const
+{
+    MBanner *infoBanner = new MBanner;
+    infoBanner->setStyleName("InformationBanner");
+    infoBanner->setTitle(title);
+    infoBanner->model()->setDisappearTimeout(INFOBANNER_TIMEOUT);
+    connect(this, SIGNAL(deactivated()),
+            infoBanner, SLOT(disappear()));
+    infoBanner->appear(MApplication::activeWindow(), MSceneWindow::DestroyWhenDone);
+
+    return infoBanner;
 }
 
 Q_EXPORT_PLUGIN2(galleryenlargeshrinkplugin, GalleryEnlargeShrinkPlugin)

@@ -36,6 +36,9 @@ public:
 
     //! Focus position
     QPoint m_focusPosition;
+
+    //! If the effect can be applied to the image or not
+    bool m_validImage;
 };
 
 #endif /* GALLERYENLARGESHRINKPLUGIN_P_H */

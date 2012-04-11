@@ -25,6 +25,8 @@
 
 #include <galleryeditplugin.h>
 
+class MBanner;
+class MMessageBox;
 class GalleryEnlargeShrinkPluginPrivate;
 
 class GalleryEnlargeShrinkPlugin: public GalleryEditPlugin
@@ -64,6 +66,17 @@ public Q_SLOTS:
 
     //! \reimp
     void activate();
+
+    //! Shows a message box with a given title and text
+    //! \param title Text to be shown as a title in the message box
+    //! \param text Text to be shown as the body in the message box
+    //! \return The message box
+    MMessageBox* showMessageBox(const QString& title, const QString& text) const;
+
+    //! Shows an info banner with a given text
+    //! \param title Text to be shown in the info banner
+    //! \return The info banner
+    MBanner* showInfoBanner(const QString& text) const;
 
 protected:
     //! \reimp

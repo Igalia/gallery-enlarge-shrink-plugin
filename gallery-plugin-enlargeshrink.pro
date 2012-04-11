@@ -3,4 +3,5 @@ SUBDIRS  = galleryenlargeshrinkplugin \
            quillenlargeshrinkplugin
 
 OTHER_FILES += \
-               COPYING
+               COPYING \
+               TODO
