@@ -1,0 +1,24 @@
+Source: gallery-plugin-enlargeshrink
+Section: graphics
+Priority: extra
+Maintainer: Antia Puentes <apuentes@igalia.com>
+Build-Depends: debhelper (>= 7.0.50),
+               libgallerycore-dev (>= 1.110519.2),
+               libquillimagefilter-dev (>= 1.110523.0)
+Standards-Version: 3.9.1
+
+Package: gallery-plugin-enlargeshrink
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: Gallery Enlarge/Shrink edit plugin
+ Gallery plugin that applies an Enlarge/Shrink effect.
+
+Package: gallery-plugin-enlargeshrink-dbg
+Section: debug
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends},
+         gallery-plugin-enlargeshrink (= ${binary:Version})
+Description: Gallery Enlarge/Shrink edit plugin
+ Gallery plugin that applies an Enlarge/Shrink effect.
+ .
+ This package contains the debug symbols.

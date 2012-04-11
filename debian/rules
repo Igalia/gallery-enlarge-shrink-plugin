@@ -1,0 +1,24 @@
+#! /usr/bin/make -f
+
+# export DH_VERBOSE = 1
+
+# Teach qmake about CFLAGS, poor qmake doesn't know about it...
+#
+QMAKE_OPTIONS += QMAKE_STRIP=: \
+								 PREFIX=/usr
+
+ifneq (,$(filter debug,$(DEB_BUILD_OPTIONS)))
+	DEB_QMAKE_ARGS += "debug=yes"
+endif
+
+%:
+	dh --buildsystem=qmake $@
+
+override_dh_auto_configure:
+	qmake $(QMAKE_OPTIONS) $(DEB_QMAKE_ARGS)
+
+override_dh_strip:
+	dh_strip --dbg-package=gallery-plugin-enlargeshrink-dbg
+
+.PHONY: override_dh_auto_configure override_dh_strip
+
