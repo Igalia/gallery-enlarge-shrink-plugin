@@ -18,6 +18,41 @@ GalleryEnlargeShrinkWidget MButtonStyle#CommonSwitchInverted {
     slider-image-selected:  "color10-meegotouch-switch-on-inverted" 32px 32px 20px 20px;
 }
 
+GalleryEnlargeShrinkWidget MSeparatorStyle#CommonHeaderDividerInverted {
+    background-image: meegotouch-groupheader-inverted-background 0px 0px 0px 0px;
+    span:           0.2mm;
+    margin-top:     $PADDING_DOUBLE;
+    margin-bottom:  0;
+    margin-left:    $INDENT_DEFAULT;
+    margin-right:   $INDENT_DEFAULT;
+}
+
+GalleryEnlargeShrinkAboutWidget MLabelStyle#EnlargeShrinkAboutDisclaimer {
+    font: $FONT_FAMILY normal 14;
+    margin-top: $PADDING_LARGE;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: $PADDING_LARGE;
+    color: $COLOR_BUTTON_DISABLED_FOREGROUND;
+    highlight-color: $COLOR_ACCENT10;
+}
+
+GalleryEnlargeShrinkAboutWidget MLabelStyle#EnlargeShrinkAboutLink {
+    font: $FONT_FAMILY normal 14;
+    margin-top: $PADDING_LARGE;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: $PADDING_LARGE;
+    color: $COLOR_BUTTON_DISABLED_FOREGROUND;
+    highlight-color: $COLOR_ACCENT10;
+}
+
 #EnlargeShrinkEditorControl {
     background-image: "meegotouch-image-edit-control-panel-background" 1px 1px 1px 1px;
 }

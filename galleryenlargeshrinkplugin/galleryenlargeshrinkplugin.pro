@@ -21,10 +21,12 @@ contains( debug, yes ) {
 HEADERS += galleryenlargeshrinkplugin.h \
            galleryenlargeshrinkplugin_p.h \
            galleryenlargeshrinkwidget.h \
-           galleryenlargeshrinkwidget_p.h
+           galleryenlargeshrinkwidget_p.h \
+           galleryenlargeshrinkaboutwidget.h
 
 SOURCES += galleryenlargeshrinkplugin.cpp \
-           galleryenlargeshrinkwidget.cpp
+           galleryenlargeshrinkwidget.cpp \
+           galleryenlargeshrinkaboutwidget.cpp
 
 OTHER_FILES += \
             conf/libgalleryenlargeshrinktplugin.css

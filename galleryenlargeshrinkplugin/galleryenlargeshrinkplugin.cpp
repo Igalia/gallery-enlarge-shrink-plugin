@@ -31,13 +31,18 @@
 #include <MMessageBox>
 #include <MLabel>
 #include <QGraphicsSceneMouseEvent>
+#include <QDesktopServices>
+#include <QUrl>
+#include <QTextOption>
+
+
 #include <QuillImageFilter>
 
 
 static const float   EFFECT_FORCE          = 1.0;
 static const int     TAP_DISTANCE          = 20;
-static const int     PORTRAIT_HEIGHT       = 120;
-static const int     LANDSCAPE_HEIGHT      = 72;
+static const int     PORTRAIT_HEIGHT       = 152;
+static const int     LANDSCAPE_HEIGHT      = 112;
 static const int     INFOBANNER_TIMEOUT    = 2 * 1000;
 static const int     IMAGE_MAX_HEIGHT      = 512;
 static const int     IMAGE_MAX_WIDTH       = 512;
@@ -90,6 +95,8 @@ bool GalleryEnlargeShrinkPlugin::zoomingAllowed() const
 QGraphicsWidget* GalleryEnlargeShrinkPlugin::createToolBarWidget(QGraphicsItem* parent)
 {
     GalleryEnlargeShrinkWidget* widget = new GalleryEnlargeShrinkWidget(parent);
+    connect(widget, SIGNAL(aboutLinkActivated(QString)),
+            this,   SLOT(onAboutLinkActivated(QString)));
     return widget;
 }
 
@@ -143,7 +150,7 @@ void GalleryEnlargeShrinkPlugin::activate()
                            "<li>Apply the filter to the new one</li>"
                            "</ol>");
             GalleryEnlargeShrinkWidget* widget = static_cast<GalleryEnlargeShrinkWidget*>(toolBarWidget());
-            widget->setEnabled(d->m_validImage);
+            widget->enableInput(d->m_validImage);
         }
     }
 }
@@ -197,6 +204,25 @@ MBanner* GalleryEnlargeShrinkPlugin::showInfoBanner(const QString& title) const
     infoBanner->appear(MApplication::activeWindow(), MSceneWindow::DestroyWhenDone);
 
     return infoBanner;
+}
+
+void GalleryEnlargeShrinkPlugin::onAboutLinkActivated(const QString &link)
+{
+    Q_UNUSED(link)
+    if (link.toLower().startsWith("http") || link.toLower().startsWith("mailto")) {
+        QDesktopServices::openUrl(QUrl(link));
+    } else {
+        showMessageBox("About Enlarge Shrink plugin",
+                       "Copyright (c) 2012 Igalia S.L."
+                       "<br /><br />"
+                       "<a href=\"mailto:apuentes@igalia.com\">apuentes@igalia.com</a> | "
+                       "<a href=\"http://www.igalia.com\">www.igalia.com</a>"
+                       "<br /><br />"
+                       "This library is free software; you can redistribute it and/or "
+                       "modify it under the terms of the GNU Lesser General Public License "
+                       "as published by the Free Software Foundation; version 2.1 of "
+                       "the License, or (at your option) any later version.");
+    }
 }
 
 Q_EXPORT_PLUGIN2(galleryenlargeshrinkplugin, GalleryEnlargeShrinkPlugin)

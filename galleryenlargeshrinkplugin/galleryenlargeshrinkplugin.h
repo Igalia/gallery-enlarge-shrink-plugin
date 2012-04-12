@@ -78,6 +78,10 @@ public Q_SLOTS:
     //! \return The info banner
     MBanner* showInfoBanner(const QString& text) const;
 
+    //! Invoked when a link in the about notice has been activated
+    //! \param link The activated link
+    void onAboutLinkActivated(const QString& link);
+
 protected:
     //! \reimp
     QGraphicsWidget* createToolBarWidget(QGraphicsItem* parent = 0);

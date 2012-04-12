@@ -50,6 +50,10 @@ public:
     //! \return True if visible, otherwise false
     bool isRadiusSliderHandleLabelVisible() const;
 
+    //! Depending on the value of enable, enables or disables the
+    //! input widgets contained in the widget.
+    void enableInput(bool enabled);
+
 public Q_SLOTS:
     //! Called to show the radius slider handle label
     void showRadiusSliderHandleLabel();
@@ -59,6 +63,10 @@ public Q_SLOTS:
 
     //! Updates the radius slider handle label to the current value
     void handleRadiusValueChanged(int newValue);
+
+Q_SIGNALS:
+    //! Emitted when a link in the about notice was activated
+    void aboutLinkActivated(const QString& link);
 
 private:
     Q_DISABLE_COPY(GalleryEnlargeShrinkWidget)

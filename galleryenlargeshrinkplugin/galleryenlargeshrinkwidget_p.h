@@ -23,11 +23,12 @@
 #ifndef GALLERYENLARGESHRINKWIDGET_P_H
 #define GALLERYENLARGESHRINKWIDGET_P_H
 
-class MLinearLayoutPolicy;
 class MGridLayoutPolicy;
 class MSlider;
 class MButton;
 class MLabel;
+class MSeparator;
+class GalleryEnlargeShrinkAboutWidget;
 
 class GalleryEnlargeShrinkWidgetPrivate
 {
@@ -51,10 +52,16 @@ public:
     MLabel *m_radiusLabel;
 
     //! Landscape policy for the focus area layout
-    MLinearLayoutPolicy* m_landscapePolicy;
+    MGridLayoutPolicy* m_landscapePolicy;
 
     //! Portrait policy for the focus area layout
     MGridLayoutPolicy* m_portraitPolicy;
+
+    //! Separator dividing the widget from the about claim
+    MSeparator* m_aboutSeparator;
+
+    //! Widget containing the about disclaimer
+    GalleryEnlargeShrinkAboutWidget* m_aboutWidget;
 };
 
 #endif /* GALLERYENLARGESHRINKWIDGET_P_H */

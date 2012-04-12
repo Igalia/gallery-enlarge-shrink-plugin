@@ -22,16 +22,17 @@
 
 #include "galleryenlargeshrinkwidget.h"
 #include "galleryenlargeshrinkwidget_p.h"
+#include "galleryenlargeshrinkaboutwidget.h"
 
 #include <MApplication>
 #include <MWidgetCreator>
 #include <MLocale>
 #include <MLayout>
-#include <MLinearLayoutPolicy>
 #include <MGridLayoutPolicy>
 #include <MLabel>
 #include <MButton>
 #include <MSlider>
+#include <MSeparator>
 
 M_REGISTER_WIDGET_NO_CREATE(GalleryEnlargeShrinkWidget)
 
@@ -41,7 +42,9 @@ GalleryEnlargeShrinkWidgetPrivate::GalleryEnlargeShrinkWidgetPrivate():
     m_radiusSlider(0),
     m_radiusLabel(0),
     m_landscapePolicy(0),
-    m_portraitPolicy(0)
+    m_portraitPolicy(0),
+    m_aboutSeparator(new MSeparator),
+    m_aboutWidget(new GalleryEnlargeShrinkAboutWidget)
 {
 }
 
@@ -53,6 +56,8 @@ GalleryEnlargeShrinkWidgetPrivate::~GalleryEnlargeShrinkWidgetPrivate()
     delete m_radiusLabel;
     delete m_landscapePolicy;
     delete m_portraitPolicy;
+    delete m_aboutSeparator;
+    delete m_aboutWidget;
 }
 
 GalleryEnlargeShrinkWidget::GalleryEnlargeShrinkWidget(QGraphicsItem* parent) :
@@ -64,6 +69,10 @@ GalleryEnlargeShrinkWidget::GalleryEnlargeShrinkWidget(QGraphicsItem* parent) :
     setContentsMargins(0, 0, 0, 0);
 
     Q_D(GalleryEnlargeShrinkWidget);
+    d->m_aboutSeparator->setStyleName("CommonHeaderDividerInverted");
+    connect(d->m_aboutWidget, SIGNAL(linkActivated(QString)),
+            this, SIGNAL(aboutLinkActivated(QString)));
+
     d->m_shrinkLabel = new MLabel("Shrink");
     d->m_shrinkLabel->setObjectName("GalleryEnlargeShrinkShrinkLabel");
     d->m_shrinkLabel->setStyleName("CommonSingleTitleInverted");
@@ -96,31 +105,38 @@ GalleryEnlargeShrinkWidget::GalleryEnlargeShrinkWidget(QGraphicsItem* parent) :
     mainLayout->setContentsMargins(0, 0, 0, 0);
     mainLayout->setAnimation(0);
 
-    d->m_landscapePolicy = new MLinearLayoutPolicy(mainLayout, Qt::Horizontal);
+    d->m_landscapePolicy = new MGridLayoutPolicy(mainLayout);
     d->m_landscapePolicy->setContentsMargins(0, 0, 0, 0);
     d->m_landscapePolicy->setSpacing(0);
-    d->m_landscapePolicy->setNotifyWidgetsOfLayoutPositionEnabled(true);
-    d->m_landscapePolicy->addItem(d->m_shrinkLabel);
-    d->m_landscapePolicy->addItem(d->m_shrinkButton);
-    d->m_landscapePolicy->addItem(d->m_radiusLabel);
-    d->m_landscapePolicy->addItem(d->m_radiusSlider);
-    d->m_landscapePolicy->setAlignment(d->m_shrinkLabel,  Qt::AlignVCenter | Qt::AlignHCenter);
-    d->m_landscapePolicy->setAlignment(d->m_shrinkButton, Qt::AlignVCenter | Qt::AlignHCenter);
-    d->m_landscapePolicy->setAlignment(d->m_radiusLabel,  Qt::AlignVCenter | Qt::AlignHCenter);
-    d->m_landscapePolicy->setAlignment(d->m_radiusSlider, Qt::AlignVCenter | Qt::AlignHCenter);
+    d->m_landscapePolicy->addItem(d->m_shrinkLabel,    0, 0);
+    d->m_landscapePolicy->addItem(d->m_shrinkButton,   0, 1);
+    d->m_landscapePolicy->addItem(d->m_radiusLabel,    0, 2);
+    d->m_landscapePolicy->addItem(d->m_radiusSlider,   0, 3);
+    d->m_landscapePolicy->addItem(d->m_aboutSeparator, 1, 0, 1, 4);
+    d->m_landscapePolicy->addItem(d->m_aboutWidget,    2, 0, 1, 4);
+    d->m_landscapePolicy->setAlignment(d->m_shrinkLabel,    Qt::AlignVCenter | Qt::AlignHCenter);
+    d->m_landscapePolicy->setAlignment(d->m_shrinkButton,   Qt::AlignVCenter | Qt::AlignHCenter);
+    d->m_landscapePolicy->setAlignment(d->m_radiusLabel,    Qt::AlignVCenter | Qt::AlignHCenter);
+    d->m_landscapePolicy->setAlignment(d->m_radiusSlider,   Qt::AlignVCenter | Qt::AlignHCenter);
+    d->m_landscapePolicy->setAlignment(d->m_aboutSeparator, Qt::AlignVCenter | Qt::AlignHCenter);
+    d->m_landscapePolicy->setAlignment(d->m_aboutWidget,    Qt::AlignVCenter | Qt::AlignHCenter);
     mainLayout->setLandscapePolicy(d->m_landscapePolicy);
 
     d->m_portraitPolicy = new MGridLayoutPolicy(mainLayout);
     d->m_portraitPolicy->setContentsMargins(0, 0, 0, 0);
     d->m_portraitPolicy->setSpacing(0);
-    d->m_portraitPolicy->addItem(d->m_shrinkLabel,  0, 0);
-    d->m_portraitPolicy->addItem(d->m_shrinkButton, 0, 1);
-    d->m_portraitPolicy->addItem(d->m_radiusLabel,  1, 0);
-    d->m_portraitPolicy->addItem(d->m_radiusSlider, 1, 1);
-    d->m_portraitPolicy->setAlignment(d->m_shrinkLabel,  Qt::AlignVCenter | Qt::AlignHCenter);
-    d->m_portraitPolicy->setAlignment(d->m_shrinkButton, Qt::AlignVCenter | Qt::AlignHCenter);
-    d->m_portraitPolicy->setAlignment(d->m_radiusLabel,  Qt::AlignVCenter | Qt::AlignHCenter);
-    d->m_portraitPolicy->setAlignment(d->m_radiusSlider, Qt::AlignVCenter | Qt::AlignHCenter);
+    d->m_portraitPolicy->addItem(d->m_shrinkLabel,    0, 0);
+    d->m_portraitPolicy->addItem(d->m_shrinkButton,   0, 1);
+    d->m_portraitPolicy->addItem(d->m_radiusLabel,    1, 0);
+    d->m_portraitPolicy->addItem(d->m_radiusSlider,   1, 1);
+    d->m_portraitPolicy->addItem(d->m_aboutSeparator, 2, 0, 1, 2);
+    d->m_portraitPolicy->addItem(d->m_aboutWidget,    3, 0, 1, 2);
+    d->m_portraitPolicy->setAlignment(d->m_shrinkLabel,    Qt::AlignVCenter | Qt::AlignHCenter);
+    d->m_portraitPolicy->setAlignment(d->m_shrinkButton,   Qt::AlignVCenter | Qt::AlignHCenter);
+    d->m_portraitPolicy->setAlignment(d->m_radiusLabel,    Qt::AlignVCenter | Qt::AlignHCenter);
+    d->m_portraitPolicy->setAlignment(d->m_radiusSlider,   Qt::AlignVCenter | Qt::AlignHCenter);
+    d->m_portraitPolicy->setAlignment(d->m_aboutSeparator, Qt::AlignVCenter | Qt::AlignHCenter);
+    d->m_portraitPolicy->setAlignment(d->m_aboutWidget,    Qt::AlignVCenter | Qt::AlignHCenter);
     mainLayout->setPortraitPolicy(d->m_portraitPolicy);
 
     setLayout(mainLayout);
@@ -181,4 +197,15 @@ void GalleryEnlargeShrinkWidget::handleRadiusValueChanged(int newValue)
         Q_D(GalleryEnlargeShrinkWidget);
         d->m_radiusSlider->setHandleLabel(value);
     }
+}
+
+void GalleryEnlargeShrinkWidget::enableInput(bool enabled)
+{
+    // Don't disable the complete widget as we still want to react to
+    // device orientation changes and click in the About widget links.
+    Q_D(GalleryEnlargeShrinkWidget);
+    d->m_shrinkButton->setEnabled(enabled);
+    d->m_shrinkLabel->setEnabled(enabled);
+    d->m_radiusSlider->setEnabled(enabled);
+    d->m_radiusLabel->setEnabled(enabled);
 }
