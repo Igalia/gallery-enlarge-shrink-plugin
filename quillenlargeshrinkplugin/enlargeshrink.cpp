@@ -244,8 +244,8 @@ bool EnlargeShrink::enlargeShrink(const QuillImage &img,
                 double tx = center.x() + dx;
                 double ty = center.y() + dy;
                 // Crop off overflows
-                if (tx > img.width()  || tx < 0) tx = x;
-                if (ty > img.height() || ty < 0) ty = y;
+                if (tx >= img.width()  || tx < 0) tx = x;
+                if (ty >= img.height() || ty < 0) ty = y;
 
                 outputImg->setPixel(x, y, getPixel(img, tx, ty));
             }
