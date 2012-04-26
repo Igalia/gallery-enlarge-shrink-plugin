@@ -31,14 +31,19 @@
 #include <MGridLayoutPolicy>
 #include <MLabel>
 #include <MButton>
+#include <MButtonGroup>
 #include <MSlider>
 #include <MSeparator>
+
+#define ENLARGE_BUTTON_ID  1
+#define SHRINK_BUTTON_ID   2
 
 M_REGISTER_WIDGET_NO_CREATE(GalleryEnlargeShrinkWidget)
 
 GalleryEnlargeShrinkWidgetPrivate::GalleryEnlargeShrinkWidgetPrivate():
+    m_enlargeButton(0),
     m_shrinkButton(0),
-    m_shrinkLabel(0),
+    m_effectButtonGroup(new MButtonGroup),
     m_radiusSlider(0),
     m_radiusLabel(0),
     m_landscapePolicy(0),
@@ -50,8 +55,9 @@ GalleryEnlargeShrinkWidgetPrivate::GalleryEnlargeShrinkWidgetPrivate():
 
 GalleryEnlargeShrinkWidgetPrivate::~GalleryEnlargeShrinkWidgetPrivate()
 {
+    delete m_enlargeButton;
     delete m_shrinkButton;
-    delete m_shrinkLabel;
+    delete m_effectButtonGroup;
     delete m_radiusSlider;
     delete m_radiusLabel;
     delete m_landscapePolicy;
@@ -73,15 +79,21 @@ GalleryEnlargeShrinkWidget::GalleryEnlargeShrinkWidget(QGraphicsItem* parent) :
     connect(d->m_aboutWidget, SIGNAL(linkActivated(QString)),
             this, SIGNAL(aboutLinkActivated(QString)));
 
-    d->m_shrinkLabel = new MLabel("Shrink");
-    d->m_shrinkLabel->setObjectName("GalleryEnlargeShrinkShrinkLabel");
-    d->m_shrinkLabel->setStyleName("CommonSingleTitleInverted");
-    d->m_shrinkButton = new MButton();
-    d->m_shrinkButton->setObjectName("GalleryEnlargeShrinkButton");
-    d->m_shrinkButton->setStyleName("CommonSwitchInverted");
-    d->m_shrinkButton->setViewType(MButton::switchType);
+
+    d->m_enlargeButton = new MButton("Enlarge");
+    d->m_enlargeButton->setObjectName("GalleryEnlargeButton");
+    d->m_enlargeButton->setStyleName("CommonTopSplitButtonInverted");
+    d->m_enlargeButton->setViewType(MButton::toggleType);
+    d->m_enlargeButton->setCheckable(true);
+    d->m_shrinkButton = new MButton("Shrink");
+    d->m_shrinkButton->setObjectName("GalleryShrinkButton");
+    d->m_shrinkButton->setStyleName("CommonBottomSplitButtonInverted");
+    d->m_shrinkButton->setViewType(MButton::toggleType);
     d->m_shrinkButton->setCheckable(true);
-    d->m_shrinkButton->setChecked(true);
+    d->m_effectButtonGroup->setExclusive(true);
+    d->m_effectButtonGroup->addButton(d->m_enlargeButton, ENLARGE_BUTTON_ID);
+    d->m_effectButtonGroup->addButton(d->m_shrinkButton,  SHRINK_BUTTON_ID);
+    d->m_enlargeButton->click();
 
     d->m_radiusLabel = new MLabel("Radius");
     d->m_radiusLabel->setObjectName("GalleryEnlargeShrinkRadiusLabel");
@@ -108,13 +120,13 @@ GalleryEnlargeShrinkWidget::GalleryEnlargeShrinkWidget(QGraphicsItem* parent) :
     d->m_landscapePolicy = new MGridLayoutPolicy(mainLayout);
     d->m_landscapePolicy->setContentsMargins(0, 0, 0, 0);
     d->m_landscapePolicy->setSpacing(0);
-    d->m_landscapePolicy->addItem(d->m_shrinkLabel,    0, 0);
+    d->m_landscapePolicy->addItem(d->m_enlargeButton,  0, 0);
     d->m_landscapePolicy->addItem(d->m_shrinkButton,   0, 1);
     d->m_landscapePolicy->addItem(d->m_radiusLabel,    0, 2);
     d->m_landscapePolicy->addItem(d->m_radiusSlider,   0, 3);
     d->m_landscapePolicy->addItem(d->m_aboutSeparator, 1, 0, 1, 4);
     d->m_landscapePolicy->addItem(d->m_aboutWidget,    2, 0, 1, 4);
-    d->m_landscapePolicy->setAlignment(d->m_shrinkLabel,    Qt::AlignVCenter | Qt::AlignHCenter);
+    d->m_landscapePolicy->setAlignment(d->m_enlargeButton,  Qt::AlignVCenter | Qt::AlignHCenter);
     d->m_landscapePolicy->setAlignment(d->m_shrinkButton,   Qt::AlignVCenter | Qt::AlignHCenter);
     d->m_landscapePolicy->setAlignment(d->m_radiusLabel,    Qt::AlignVCenter | Qt::AlignHCenter);
     d->m_landscapePolicy->setAlignment(d->m_radiusSlider,   Qt::AlignVCenter | Qt::AlignHCenter);
@@ -125,13 +137,13 @@ GalleryEnlargeShrinkWidget::GalleryEnlargeShrinkWidget(QGraphicsItem* parent) :
     d->m_portraitPolicy = new MGridLayoutPolicy(mainLayout);
     d->m_portraitPolicy->setContentsMargins(0, 0, 0, 0);
     d->m_portraitPolicy->setSpacing(0);
-    d->m_portraitPolicy->addItem(d->m_shrinkLabel,    0, 0);
-    d->m_portraitPolicy->addItem(d->m_shrinkButton,   0, 1);
-    d->m_portraitPolicy->addItem(d->m_radiusLabel,    1, 0);
-    d->m_portraitPolicy->addItem(d->m_radiusSlider,   1, 1);
-    d->m_portraitPolicy->addItem(d->m_aboutSeparator, 2, 0, 1, 2);
-    d->m_portraitPolicy->addItem(d->m_aboutWidget,    3, 0, 1, 2);
-    d->m_portraitPolicy->setAlignment(d->m_shrinkLabel,    Qt::AlignVCenter | Qt::AlignHCenter);
+    d->m_portraitPolicy->addItem(d->m_enlargeButton,  0, 0, 1, 2);
+    d->m_portraitPolicy->addItem(d->m_shrinkButton,   1, 0, 1, 2);
+    d->m_portraitPolicy->addItem(d->m_radiusLabel,    2, 0);
+    d->m_portraitPolicy->addItem(d->m_radiusSlider,   2, 1);
+    d->m_portraitPolicy->addItem(d->m_aboutSeparator, 3, 0, 1, 2);
+    d->m_portraitPolicy->addItem(d->m_aboutWidget,    4, 0, 1, 2);
+    d->m_portraitPolicy->setAlignment(d->m_enlargeButton,  Qt::AlignVCenter | Qt::AlignHCenter);
     d->m_portraitPolicy->setAlignment(d->m_shrinkButton,   Qt::AlignVCenter | Qt::AlignHCenter);
     d->m_portraitPolicy->setAlignment(d->m_radiusLabel,    Qt::AlignVCenter | Qt::AlignHCenter);
     d->m_portraitPolicy->setAlignment(d->m_radiusSlider,   Qt::AlignVCenter | Qt::AlignHCenter);
@@ -168,7 +180,8 @@ int GalleryEnlargeShrinkWidget::radius() const
 bool GalleryEnlargeShrinkWidget::shrink() const
 {
     Q_D(const GalleryEnlargeShrinkWidget);
-    return d->m_shrinkButton->isChecked();
+    return (d->m_effectButtonGroup->checkedId() == SHRINK_BUTTON_ID);
+
 }
 
 bool GalleryEnlargeShrinkWidget::isRadiusSliderHandleLabelVisible() const
@@ -204,8 +217,10 @@ void GalleryEnlargeShrinkWidget::enableInput(bool enabled)
     // Don't disable the complete widget as we still want to react to
     // device orientation changes and click in the About widget links.
     Q_D(GalleryEnlargeShrinkWidget);
+
+    d->m_enlargeButton->setEnabled(enabled);
     d->m_shrinkButton->setEnabled(enabled);
-    d->m_shrinkLabel->setEnabled(enabled);
+    d->m_shrinkButton->setEnabled(enabled);
     d->m_radiusSlider->setEnabled(enabled);
     d->m_radiusLabel->setEnabled(enabled);
 }

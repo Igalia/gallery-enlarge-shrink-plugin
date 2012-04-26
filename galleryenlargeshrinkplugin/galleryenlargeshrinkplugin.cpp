@@ -41,7 +41,7 @@
 
 static const float   EFFECT_FORCE          = 1.0;
 static const int     TAP_DISTANCE          = 20;
-static const int     PORTRAIT_HEIGHT       = 152;
+static const int     PORTRAIT_HEIGHT       = 224;
 static const int     LANDSCAPE_HEIGHT      = 112;
 static const int     INFOBANNER_TIMEOUT    = 2 * 1000;
 static const int     IMAGE_MAX_HEIGHT      = 512;

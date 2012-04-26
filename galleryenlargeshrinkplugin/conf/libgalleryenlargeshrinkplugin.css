@@ -14,8 +14,52 @@ GalleryEnlargeShrinkWidget MSliderStyle#CommonSliderInverted {
     preferred-size: -1 -1;
 }
 
-GalleryEnlargeShrinkWidget MButtonStyle#CommonSwitchInverted {
-    slider-image-selected:  "color10-meegotouch-switch-on-inverted" 32px 32px 20px 20px;
+GalleryEnlargeShrinkWidget MButtonStyle#CommonTopSplitButtonInverted.Portrait:selected {
+    background-image : "color10-meegotouch-button-inverted-background-selected-vertical-top" $CORNER_MARGINS;
+}
+
+GalleryEnlargeShrinkWidget MButtonStyle#CommonTopSplitButtonInverted.Portrait:pressed {
+    background-image : "color10-meegotouch-button-inverted-background-pressed-vertical-top" $CORNER_MARGINS;
+}
+
+GalleryEnlargeShrinkWidget MButtonStyle#CommonTopSplitButtonInverted.Landscape:selected {
+    background-image : "color10-meegotouch-button-inverted-background-selected-horizontal-left" $CORNER_MARGINS;
+}
+
+GalleryEnlargeShrinkWidget MButtonStyle#CommonTopSplitButtonInverted.Landscape:pressed {
+    background-image : "color10-meegotouch-button-inverted-background-pressed-horizontal-left" $CORNER_MARGINS;
+}
+
+GalleryEnlargeShrinkWidget MButtonStyle#CommonBottomSplitButtonInverted.Portrait:selected {
+    background-image : "color10-meegotouch-button-inverted-background-selected-vertical-bottom" $CORNER_MARGINS;
+}
+
+GalleryEnlargeShrinkWidget MButtonStyle#CommonBottomSplitButtonInverted.Portrait:pressed {
+    background-image : "color10-meegotouch-button-inverted-background-pressed-vertical-bottom" $CORNER_MARGINS;
+}
+
+GalleryEnlargeShrinkWidget MButtonStyle#CommonBottomSplitButtonInverted.Landscape:selected {
+    background-image : "color10-meegotouch-button-inverted-background-selected-horizontal-right" $CORNER_MARGINS;
+}
+
+GalleryEnlargeShrinkWidget MButtonStyle#CommonBottomSplitButtonInverted.Landscape:pressed {
+    background-image : "color10-meegotouch-button-inverted-background-pressed-horizontal-right" $CORNER_MARGINS;
+}
+
+GalleryEnlargeShrinkWidget MButtonStyle#CommonVerticalCenterSplitButtonInverted.Portrait:selected {
+    background-image: "color10-meegotouch-button-inverted-background-selected-vertical-center" $CORNER_MARGINS;
+}
+
+GalleryEnlargeShrinkWidget MButtonStyle#CommonVerticalCenterSplitButtonInverted.Portrait:pressed {
+    background-image: "color10-meegotouch-button-inverted-background-pressed-vertical-center" $CORNER_MARGINS;
+}
+
+GalleryEnlargeShrinkWidget MButtonStyle#CommonVerticalCenterSplitButtonInverted.Landscape:selected {
+    background-image: "color10-meegotouch-button-inverted-background-selected-vertical-center" $CORNER_MARGINS;
+}
+
+GalleryEnlargeShrinkWidget MButtonStyle#CommonVerticalCenterSplitButtonInverted.Landscape:pressed {
+    background-image: "color10-meegotouch-button-inverted-background-pressed-vertical-center" $CORNER_MARGINS;
 }
 
 GalleryEnlargeShrinkWidget MSeparatorStyle#CommonHeaderDividerInverted {

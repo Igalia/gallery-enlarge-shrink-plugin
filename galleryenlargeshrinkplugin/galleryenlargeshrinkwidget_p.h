@@ -26,6 +26,7 @@
 class MGridLayoutPolicy;
 class MSlider;
 class MButton;
+class MButtonGroup;
 class MLabel;
 class MSeparator;
 class GalleryEnlargeShrinkAboutWidget;
@@ -39,11 +40,14 @@ public:
     //! GalleryEnlargeShrinkWidgetPrivate destructor
     virtual ~GalleryEnlargeShrinkWidgetPrivate();
 
-    //! Button to select between "enlarge" or "shrink"
+    //! Button to select the "enlarge" effect
+    MButton *m_enlargeButton;
+
+    //! Button to select the "shrink" effect
     MButton *m_shrinkButton;
 
-    //! Label associated to the shrink button
-    MLabel *m_shrinkLabel;
+    //! Button group to select between the "shrink" or "enlarge" effects
+    MButtonGroup * m_effectButtonGroup;
 
     //! Slider to choose the focus area radius
     MSlider* m_radiusSlider;
