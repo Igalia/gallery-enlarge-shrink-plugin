@@ -68,6 +68,10 @@ Q_SIGNALS:
     //! Emitted when a link in the about notice was activated
     void aboutLinkActivated(const QString& link);
 
+private Q_SLOTS:
+    //! Called to adapt the UI to the new effect
+    void effectButtonClicked(int buttonId);
+
 private:
     Q_DISABLE_COPY(GalleryEnlargeShrinkWidget)
     Q_DECLARE_PRIVATE(GalleryEnlargeShrinkWidget)

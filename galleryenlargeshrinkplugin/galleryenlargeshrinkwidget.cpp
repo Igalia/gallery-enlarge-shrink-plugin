@@ -38,6 +38,11 @@
 #define ENLARGE_BUTTON_ID  1
 #define SHRINK_BUTTON_ID   2
 
+#define ENLARGE_MAX_RADIUS        100
+#define SHRINK_MAX_RADIUS          30
+#define DEFAULT_ENLARGE_RADIUS     30
+#define DEFAULT_SHRINK_RADIUS      15
+
 M_REGISTER_WIDGET_NO_CREATE(GalleryEnlargeShrinkWidget)
 
 GalleryEnlargeShrinkWidgetPrivate::GalleryEnlargeShrinkWidgetPrivate():
@@ -94,6 +99,8 @@ GalleryEnlargeShrinkWidget::GalleryEnlargeShrinkWidget(QGraphicsItem* parent) :
     d->m_effectButtonGroup->addButton(d->m_enlargeButton, ENLARGE_BUTTON_ID);
     d->m_effectButtonGroup->addButton(d->m_shrinkButton,  SHRINK_BUTTON_ID);
     d->m_enlargeButton->click();
+    connect(d->m_effectButtonGroup, SIGNAL(buttonClicked(int)),
+            SLOT(effectButtonClicked(int)));
 
     d->m_radiusLabel = new MLabel("Radius");
     d->m_radiusLabel->setObjectName("GalleryEnlargeShrinkRadiusLabel");
@@ -101,8 +108,8 @@ GalleryEnlargeShrinkWidget::GalleryEnlargeShrinkWidget(QGraphicsItem* parent) :
     d->m_radiusSlider = new MSlider();
     d->m_radiusSlider->setObjectName("GalleryEnlargeShrinkRadiusSlider");
     d->m_radiusSlider->setStyleName("CommonSliderInverted");
-    d->m_radiusSlider->setRange(0, 100);
-    d->m_radiusSlider->setValue(50);
+    d->m_radiusSlider->setRange(0, ENLARGE_MAX_RADIUS);
+    d->m_radiusSlider->setValue(DEFAULT_ENLARGE_RADIUS);
     MLocale locale;
     d->m_radiusSlider->setHandleLabel(locale.formatPercent(0));
     connect(d->m_radiusSlider, SIGNAL(valueChanged(int)),
@@ -223,4 +230,17 @@ void GalleryEnlargeShrinkWidget::enableInput(bool enabled)
     d->m_shrinkButton->setEnabled(enabled);
     d->m_radiusSlider->setEnabled(enabled);
     d->m_radiusLabel->setEnabled(enabled);
+}
+
+void GalleryEnlargeShrinkWidget::effectButtonClicked(int buttonId)
+{
+    Q_D(GalleryEnlargeShrinkWidget);
+
+    if (buttonId == ENLARGE_BUTTON_ID) {
+        d->m_radiusSlider->setRange(0, ENLARGE_MAX_RADIUS);
+        d->m_radiusSlider->setValue(DEFAULT_ENLARGE_RADIUS);
+    } else if (buttonId == SHRINK_BUTTON_ID) {
+        d->m_radiusSlider->setRange(0, SHRINK_MAX_RADIUS);
+        d->m_radiusSlider->setValue(DEFAULT_SHRINK_RADIUS);
+    }
 }
