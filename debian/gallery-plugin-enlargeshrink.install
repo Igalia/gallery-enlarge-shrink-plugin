@@ -1,4 +1,5 @@
 galleryenlargeshrinkplugin/*.so usr/lib/gallery
 galleryenlargeshrinkplugin/conf/*.css usr/share/themes/base/meegotouch/libgalleryenlargeshrinkplugin/style
-galleryenlargeshrinkplugin/images/*.png /usr/share/themes/blanco/meegotouch/icons
+galleryenlargeshrinkplugin/data/icon-m-image-edit-enlarge-shrink.png usr/share/themes/base/meegotouch/icons
+galleryenlargeshrinkplugin/data/icon-l-enlarge-shrink.png usr/share/icons/hicolor/64x64/apps/
 quillenlargeshrinkplugin/*.so   usr/lib/qt4/plugins/quillimagefilters

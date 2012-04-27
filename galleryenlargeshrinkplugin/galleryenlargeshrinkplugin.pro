@@ -37,4 +37,10 @@ include($$[QT_INSTALL_DATA]/mkspecs/features/meegotouch_defines.prf)
 meegotouch.files = conf/libgalleryenlargeshrinkplugin.css
 meegotouch.path = $${M_THEME_DIR}/base/meegotouch/libgalleryenlargeshrinkplugin/style
 
-INSTALLS += target meegotouch
+editicon.files = data/icon-m-image-edit-enlarge-shrink.png
+editicon.path = /usr/share/themes/base/meegotouch/icons
+
+icon.files = data/icon-l-enlarge-shrink.png
+icon.path = /usr/share/icons/hicolor/64x64/apps/
+
+INSTALLS += target meegotouch editicon icon
