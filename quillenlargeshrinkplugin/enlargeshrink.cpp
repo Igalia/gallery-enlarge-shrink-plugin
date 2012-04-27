@@ -17,7 +17,12 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library. If not, see http://www.gnu.org/licenses/ *
+ * License along with this library. If not, see http://www.gnu.org/licenses/
+ *
+ * The code for the pinch/punch algorithm is based on the punchfilter
+ * implementation of the qtimagefilters, which is (C) 2009 Nokia Corporation
+ * and released under the GNU GPL, the GNU LGPL and Qt Solutions Commercial
+ * License Agreement.
  */
 
 #include "enlargeshrink.h"

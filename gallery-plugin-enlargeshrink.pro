@@ -4,4 +4,5 @@ SUBDIRS  = galleryenlargeshrinkplugin \
 
 OTHER_FILES += \
                COPYING \
-               TODO
+               TODO \
+               AUTHORS

@@ -2,7 +2,8 @@
  * galleryenlargeshrinkaboutwidget.cpp
  *
  * Copyright (C) 2012 Igalia, S.L.
- * Author: Antia Puentes <apuentes@igalia.com>
+ * Author: Simon Pena <spena@igalia.com>
+ *         Antia Puentes <apuentes@igalia.com>
  *
  * This file is part of the Gallery Enlarge/Shrink Plugin.
  *
