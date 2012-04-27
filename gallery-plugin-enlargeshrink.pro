@@ -5,4 +5,5 @@ SUBDIRS  = galleryenlargeshrinkplugin \
 OTHER_FILES += \
                COPYING \
                TODO \
-               AUTHORS
+               AUTHORS \
+               README.md
