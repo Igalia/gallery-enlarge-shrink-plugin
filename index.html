@@ -1,0 +1,146 @@
+<!doctype html>
+<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
+<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on http://github.com/jonrohan -->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen"/>
+    <link rel="stylesheet" href="stylesheets/bootstrap.css"/>
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/script.js"></script>
+
+    <title>Enlarge & Shrink Plugin</title>
+
+    <meta name="description" content="Enlarge & Shrink plugin for Gallery">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="title">Enlarge & Shrink Plugin</h1>
+      </header>
+      <div id="container">
+        <p class="tagline">Enlarge & Shrink plugin for Gallery</p>
+        <div id="main" role="main">
+          <article class="markdown-body">
+            <h2>What is it?</h2>
+
+            <p><em>Gallery Enlarge & Shrink Plugin</em> is a filter
+              for the Gallery application of the N9 (and N950) MeeGo
+              devices which applies a radial distortion to a
+              picture.</p>
+
+            <p>From the <a href="https://en.wikipedia.org/wiki/Distortion_%28optics%29#Radial_distortion" title="Radial Distortion">Wikipedia</a>,</p>
+
+            <blockquote>
+                <h3>Barrel distortion</h3>
+
+                <p>In <em>barrel distortion</em>, image magnification
+                  decreases with distance from the optical axis. The
+                  apparent effect is that of an image which has been
+                  mapped around a sphere (or barrel). Fisheye lenses,
+                  which take hemispherical views, utilize this type of
+                  distortion as a way to map an infinitely wide object
+                  plane into a finite image area.</p>
+
+                <h3>Pincushion distortion</h3>
+
+                <p>In <em>pincushion distortion</em>, image
+                  magnification increases with the distance from the
+                  optical axis. The visible effect is that lines that
+                  do not go through the centre of the image are bowed
+                  inwards, towards the centre of the image, like a
+                  pincushion. A certain amount of pincushion
+                  distortion is often found with visual optical
+                  instruments, e.g., binoculars, where it serves to
+                  eliminate the globe effect.</p>
+            </blockquote>
+
+            <p>These distortions provide enlarge or shrink effects,
+              also know as punch or pinch respectively.</p>
+
+            <h2>Screenshots:</h2>
+
+            <div class="row">
+              <ul class="thumbnails">
+                <li class="span4">
+                  <div class="thumbnail">
+                    <a href="images/igalia-penguins-and-mugs.jpg" target="_blank"><img src="images/igalia-penguins-and-mugs.jpg"/></a>
+                    <p class="caption">Penguin and mug, before applying the effect</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="row">
+              <ul class="thumbnails">
+                <li class="span4">
+                  <div class="thumbnail">
+                    <a href="images/igalia-penguins-and-mugs-punched.jpg" target="_blank"><img src="images/igalia-penguins-and-mugs-punched.jpg"/></a>
+                    <p class="caption">Penguin and mug, after applying the enlarge effect</p>
+                  </div>
+                </li>
+                <li class="span4">
+                  <div class="thumbnail">
+                    <a href="images/igalia-penguins-and-mugs-pinched.jpg" target="_blank"><img src="images/igalia-penguins-and-mugs-pinched.jpg"/></a>
+                    <p class="caption">Penguin and mug, after applying the shrink effect</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <h2>Applying the filter to a picture:</h2>
+
+            <ul>
+              <li>From the application grid, open Gallery.</li>
+              <li>Pick a picture with a size equal or smaller than
+              512x512px (see Known Issues below).</li>
+              <li>Tap on the object menu and select <em>Edit</em>.</li>
+              <li>Tap on <em>Enlarge - Shrink</em>.</li>
+              <li>Choose the effect to be applied: Enlarge or
+              Shrink.</li>
+              <li>Select the radius of the effect in the radius
+              slider.</li>
+              <li>Tap on the screen to center the effect around the
+              given point.</li>
+            </ul>
+
+            <h2>Get support:</h2>
+
+            <p>Please, feel free to report any issues you might find in our
+	      <a href="https://github.com/Igalia/gallery-enlarge-shrink-plugin/issues">bug
+	      tracker</a>. If you prefer, you can also send me an
+	      email to <a href="mailto:agomez@igalia.com">apuentes at
+	      igalia</a>.
+	    </p>
+
+            <h3>Known issues:</h3>
+            <ul>
+              <li>Only <em>PR &gt;= 1.2</em> is currently supported.</li>
+              <li><a href="https://github.com/Igalia/gallery-enlarge-shrink-plugin/issues/1">Issue #1</a>: You will need to reboot to make the icon for the plugin appear properly</li>
+              <li><a href="https://github.com/Igalia/gallery-enlarge-shrink-plugin/issues/2">Issue #2</a>: Due to limitations in the current implementation of the filter, operating on images larger than 512x512 causes artifacts.</li>
+            </ul>
+
+          </article>
+        </div>
+      </div>
+
+      <footer>
+        <div class="owner">
+          <p><a href="https://github.com/Igalia" class="avatar"><img src="images/igalia-logo.png" width="134" height="48"/></a> maintains <a href="https://github.com/Igalia/gallery-enlarge-shrink-plugin">Enlarge & Shrink Plugin</a></p>
+        </div>
+        <div class="creds">
+          <small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br/>theme by <a href="http://twitter.com/jonrohan/">Jon Rohan</a></small>
+        </div>
+      </footer>
+    </div>
+    <div class="current-section">
+      <a href="#top">Scroll to top</a>
+      <p class="name"></p>
+    </div>
+  </body>
+</html>
