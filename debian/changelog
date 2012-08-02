@@ -1,3 +1,14 @@
+gallery-plugin-enlargeshrink (0.1.1) unstable; urgency=low
+
+  * InfoBanner uses defined constant, not hardcode one.
+  * Package version automatically integrated in About dialog.
+  * Code cleaned.
+  * Hardcoded binary dependencies to be able to install in the
+    compatible N950 device.
+  * README completed.
+
+ -- Andres Gomez <agomez@igalia.com>  Thu, 02 Aug 2012 17:44:07 +0200
+
 gallery-plugin-enlargeshrink (0.1.0) unstable; urgency=low
 
   * Initial release.
