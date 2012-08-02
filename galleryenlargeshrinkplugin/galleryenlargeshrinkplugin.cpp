@@ -196,7 +196,7 @@ MMessageBox* GalleryEnlargeShrinkPlugin::showMessageBox(const QString& title, co
 MBanner* GalleryEnlargeShrinkPlugin::showInfoBanner(const QString& title) const
 {
     MBanner *infoBanner = new MBanner;
-    infoBanner->setStyleName("InformationBanner");
+    infoBanner->setStyleName(MBannerType::InformationBanner);
     infoBanner->setTitle(title);
     infoBanner->model()->setDisappearTimeout(INFOBANNER_TIMEOUT);
     connect(this, SIGNAL(deactivated()),
