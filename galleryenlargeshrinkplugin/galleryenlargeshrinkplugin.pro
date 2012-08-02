@@ -18,6 +18,9 @@ contains( debug, yes ) {
     DEFINES += QT_NO_DEBUG_OUTPUT
 }
 
+PACKAGEVERSION = $$system(head -n 1 ../debian/changelog | grep -o [0-9].[0-9].[0-9])
+DEFINES += "PACKAGEVERSION=\\\"$$PACKAGEVERSION\\\""
+
 HEADERS += galleryenlargeshrinkplugin.h \
            galleryenlargeshrinkplugin_p.h \
            galleryenlargeshrinkwidget.h \
@@ -29,7 +32,7 @@ SOURCES += galleryenlargeshrinkplugin.cpp \
            galleryenlargeshrinkaboutwidget.cpp
 
 OTHER_FILES += \
-            conf/libgalleryenlargeshrinktplugin.css
+           conf/libgalleryenlargeshrinktplugin.css
 
 target.path = /usr/lib/gallery
 
