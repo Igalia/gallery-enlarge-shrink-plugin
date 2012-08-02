@@ -188,6 +188,12 @@ MMessageBox* GalleryEnlargeShrinkPlugin::showMessageBox(const QString& title, co
     messageBox->setCentralWidget(innerLabel);
     connect(this, SIGNAL(deactivated()),
             messageBox, SLOT(disappear()));
+
+    connect(innerLabel, SIGNAL(linkActivated(QString)),
+            this, SLOT(onAboutLinkActivated(QString)));
+    connect(this, SIGNAL(deactivated()),
+            messageBox, SLOT(disappear()));
+
     messageBox->appear(MSceneWindow::DestroyWhenDone);
 
     return messageBox;
