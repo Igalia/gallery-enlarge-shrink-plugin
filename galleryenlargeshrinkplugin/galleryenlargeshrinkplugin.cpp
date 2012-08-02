@@ -196,7 +196,7 @@ MMessageBox* GalleryEnlargeShrinkPlugin::showMessageBox(const QString& title, co
 MBanner* GalleryEnlargeShrinkPlugin::showInfoBanner(const QString& title) const
 {
     MBanner *infoBanner = new MBanner;
-    infoBanner->setStyleName("InformationBanner");
+    infoBanner->setStyleName(MBannerType::InformationBanner);
     infoBanner->setTitle(title);
     infoBanner->model()->setDisappearTimeout(INFOBANNER_TIMEOUT);
     connect(this, SIGNAL(deactivated()),
@@ -208,11 +208,10 @@ MBanner* GalleryEnlargeShrinkPlugin::showInfoBanner(const QString& title) const
 
 void GalleryEnlargeShrinkPlugin::onAboutLinkActivated(const QString &link)
 {
-    Q_UNUSED(link)
     if (link.toLower().startsWith("http") || link.toLower().startsWith("mailto")) {
         QDesktopServices::openUrl(QUrl(link));
     } else {
-        showMessageBox("About Enlarge Shrink plugin",
+        showMessageBox(QString("About Enlarge Shrink plugin - %1").arg(PACKAGEVERSION),
                        "Copyright (c) 2012 Igalia S.L."
                        "<br /><br />"
                        "<a href=\"mailto:apuentes@igalia.com\">apuentes@igalia.com</a> | "
