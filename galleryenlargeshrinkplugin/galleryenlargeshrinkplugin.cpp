@@ -211,7 +211,7 @@ void GalleryEnlargeShrinkPlugin::onAboutLinkActivated(const QString &link)
     if (link.toLower().startsWith("http") || link.toLower().startsWith("mailto")) {
         QDesktopServices::openUrl(QUrl(link));
     } else {
-        showMessageBox("About Enlarge Shrink plugin",
+        showMessageBox(QString("About Enlarge Shrink plugin - %1").arg(PACKAGEVERSION),
                        "Copyright (c) 2012 Igalia S.L."
                        "<br /><br />"
                        "<a href=\"mailto:apuentes@igalia.com\">apuentes@igalia.com</a> | "
