@@ -3,13 +3,21 @@ Section: graphics
 Priority: extra
 Maintainer: Antia Puentes <apuentes@igalia.com>
 Build-Depends: debhelper (>= 7.0.50),
-               libgallerycore-dev (>= 1.110519.2),
+               libgallerycore-dev (>= 1.120111.1+pr1.2),
                libquillimagefilter-dev (>= 1.110523.0)
 Standards-Version: 3.9.1
 
 Package: gallery-plugin-enlargeshrink
 Architecture: any
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Depends: ${misc:Depends},
+         libc6 (>= 2.4),
+         libgallerycore (>= 1.120111.1+pr1.2),
+         libgcc1 (>= 1:4.1.1),
+         libmeegotouchcore0,
+         libqtcore4 (>= 4.7.4~git20120112),
+         libqtgui4 (>= 4.7.4~git20120112),
+         libquillimagefilter1,
+         libstdc++6 (>= 4.4.0)
 Description: Gallery Enlarge/Shrink edit plugin
  Gallery plugin that applies an Enlarge/Shrink effect
  .
