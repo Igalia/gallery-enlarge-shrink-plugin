@@ -1,3 +1,9 @@
+gallery-plugin-enlargeshrink (0.1.2) unstable; urgency=low
+
+  * About dialog links to work.
+
+ -- Andres Gomez <agomez@igalia.com>  Thu, 02 Aug 2012 19:47:33 +0200
+
 gallery-plugin-enlargeshrink (0.1.1) unstable; urgency=low
 
   * InfoBanner uses defined constant, not hardcode one.
