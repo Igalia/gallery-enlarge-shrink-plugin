@@ -29,6 +29,12 @@ From the [Wikipedia] [1],
 These distortions provide enlarge or shrink effects, also know as
 punch or pinch respectively.
 
+Installing:
+-----------
+
+The easiet way of installing Gallery Enlarge/Shrink Plugin is through
+its entry in the [Nokia Store](http://store.ovi.com/content/302893).
+
 Applying the filter to a picture:
 ---------------------------------
  * From the application grid, open Gallery
@@ -38,6 +44,13 @@ Applying the filter to a picture:
  * Choose the effect to be applied: Enlarge or Shrink
  * Select the radius of the effect in the radius slider
  * Tap on the screen to center the effect around the given point
+
+Usage explanation:
+------------------
+
+For a brief usage explanation visit Gallery Enlarge/Shrink Plugin's
+[page](http://igalia.github.com/gallery-enlarge-shrink-plugin/) or
+this [video explanation](http://youtu.be/HjnXaEoymF4).
 
 Known Issues:
 -------------
