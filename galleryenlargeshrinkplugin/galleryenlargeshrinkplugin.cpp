@@ -46,6 +46,7 @@ static const int     LANDSCAPE_HEIGHT      = 112;
 static const int     INFOBANNER_TIMEOUT    = 2 * 1000;
 static const int     IMAGE_MAX_HEIGHT      = 512;
 static const int     IMAGE_MAX_WIDTH       = 512;
+static const char*   TAPPING_INSTRUCTIONS  = "Tap on the image to apply the selected effect";
 
 M_LIBRARY
 
@@ -138,7 +139,7 @@ void GalleryEnlargeShrinkPlugin::activate()
         d->m_validImage = editUiProvider()->fullImageSize().height() <= IMAGE_MAX_HEIGHT &&
                           editUiProvider()->fullImageSize().width()  <= IMAGE_MAX_WIDTH;
         if (d->m_validImage) {
-            showInfoBanner("Tap on an area to keep it focused");
+            showInfoBanner(TAPPING_INSTRUCTIONS);
         } else {
             showMessageBox("Enlarge Shrink plugin limitations",
                            "Gallery Enlarge Shrink plugin is currently limited to "
